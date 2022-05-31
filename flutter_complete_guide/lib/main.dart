@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
-import './answer.dart';
+// import './question.dart';
+// import './answer.dart';
+
+import './quiz.dart';
+import './result.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -21,32 +24,56 @@ class _MyAppState extends State<MyApp> {
   //var questions = ['What\'s your favorite colour?', 'What\'s your favorite animal'];
 
   // Convert above to Map() or implicit map by {}
-  final questions = const [
+  final _questions = const [
     {
       'questionText': 'What\'s your favorite colour?',
-      'answers': ['black', 'red', 'green', 'white'],
+      'answers': [
+        {'text': 'black', 'score': 10}, // add another Map
+        {'text': 'red', 'score': 5},
+        {'text': 'green', 'score': 2},
+        {'text': 'white', 'score': 1}
+      ],
     },
     {
       'questionText': 'What\'s your favorite animal?',
-      'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
+      'answers': [
+        {'text': 'Rabbit', 'score': 10},
+        {'text': 'Snake', 'score': 5},
+        {'text': 'Elephant', 'score': 3},
+        {'text': 'Lion', 'score': 1}
+      ],
     },
     {
       'questionText': 'What\'s your favorite car?',
-      'answers': ['Lotus', 'Lamborghini', 'Ferarri', 'Ford'],
+      'answers': [
+        {'text': 'Lotus', 'score': 10},
+        {'text': 'Lamborghini', 'score': 5},
+        {'text': 'Ferarri', 'score': 3},
+        {'text': 'Ford', 'score': 1}
+      ],
     }
   ];
 
   var _questionIndex = 0;
+  var _totalScore = 0;
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
 
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
     //var aBool = true;
+
+    _totalScore += score;
 
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
 
     print(_questionIndex);
-    if (_questionIndex < questions.length) {}
+    if (_questionIndex < _questions.length) {}
   }
 
   @override
@@ -56,31 +83,13 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('My First App'),
         ),
-        body: _questionIndex < questions.length
-            ? Column(
-                children: [
-                  Question(
-                    questions[_questionIndex]['questionText'],
-                  ),
-                  ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
-                    //spread operator before a list - take a list and pull all the values in the list out of it, to the surrounding list - adding values to the list without nesting lists
-                    //map will iterate through each item in the map
-                    return Answer(_answerQuestion, answer);
-                  }).toList()
-                  // Answer(_answerQuestion),
-                  // Answer(_answerQuestion),
-                  // Answer(_answerQuestion),
-                  // // RaisedButton(child: Text('Answer 1'), onPressed: _answerQuestion),
-                  // RaisedButton(child: Text('Answer 2'), onPressed: () => print('Answer 2 chosen!')), // anonymous function
-                  // RaisedButton(
-                  //     child: Text('Answer 3'),
-                  //     onPressed: () {
-                  //       // .... optional code if we wanna
-                  //       print('Answer 3 chosen!');
-                  //     }),
-                ],
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
               )
-            : Center(child: Text('No more questions')),
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
