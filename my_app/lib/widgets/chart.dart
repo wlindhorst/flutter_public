@@ -38,7 +38,10 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return //Container(
+        //height: MediaQuery.of(context).size.height * .4,
+        //child:
+        Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
       child: Padding(
@@ -58,6 +61,7 @@ class Chart extends StatelessWidget {
           }).toList(),
         ),
       ),
+      //),
     );
   }
 }
