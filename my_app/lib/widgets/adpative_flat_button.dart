@@ -13,8 +13,9 @@ class AdaptiveFlatButton extends StatelessWidget {
         ? CupertinoButton(
             child: Text(text, style: TextStyle(fontWeight: FontWeight.bold)),
             onPressed: handler)
-        : FlatButton(
-            textColor: Theme.of(context).primaryColor,
+        : //FlatButton(
+        TextButton(
+            // textColor: Theme.of(context).primaryColor,
             onPressed: handler,
             child: Text(text, style: TextStyle(fontWeight: FontWeight.bold)),
           );

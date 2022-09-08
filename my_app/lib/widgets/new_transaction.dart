@@ -1,4 +1,4 @@
-import 'dart:io';
+//import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/widgets/adpative_flat_button.dart';
@@ -86,12 +86,13 @@ class _NewTransactionState extends State<NewTransaction> {
                   ],
                 ),
               ),
-              RaisedButton(
+              //RaisedButton(
+              ElevatedButton(
                 onPressed: _submitData,
                 child: Text('Add Transation'),
-                color: Theme.of(context).primaryColor,
-                textColor:
-                    Theme.of(context).textTheme.button.color, //Colors.purple,
+                // color: Theme.of(context).primaryColor,
+                // textColor:
+                //     Theme.of(context).textTheme.button.color, //Colors.purple,
               ),
             ],
           ),
