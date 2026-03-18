@@ -8,8 +8,8 @@ class MealItem extends StatelessWidget {
   final Complexity complexity;
   final Affordability affordability;
 
-  MealItem(
-      {required this.title,
+  const MealItem(
+      {super.key, required this.title,
       required this.imageUrl,
       required this.affordability,
       required this.complexity,
